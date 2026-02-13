@@ -15,10 +15,11 @@ class BreedControllerTest {
     MockMvc mockMvc;
 
     @Test
-    void home_returns200_andMessage() throws Exception {
+    void home_returns200_andContainsTokenInfo() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Horse Breeds API - running"));
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("Horse Breeds API - running")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("API_TOKEN set:")));
     }
 
     @Test
